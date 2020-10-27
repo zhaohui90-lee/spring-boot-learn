@@ -1,13 +1,23 @@
-<configuration>
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+<configuration scan="true" scanPeriod="60 seconds">
+<!--    <include resource="org/springframework/boot/logging/logback/base.xml"/>-->
     <springProfile name="dev | staging">
+        <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
         <root level="debug">
-            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="stdout" />
         </root>
     </springProfile>
     <springProfile name="prod">
-        <root level="INFO">
-            <appender-ref ref="FILE"/>
+        <appender name="file" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} === [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+        <root level="info">
+            <appender-ref ref="file"/>
         </root>
     </springProfile>
 </configuration>

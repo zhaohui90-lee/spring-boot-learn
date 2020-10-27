@@ -1,0 +1,4 @@
+stu:
+  name: "张三"
+  age: ${random.int}
+  id: ${random.uuid}

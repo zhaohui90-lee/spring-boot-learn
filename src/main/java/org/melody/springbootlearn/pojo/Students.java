@@ -3,8 +3,8 @@ package org.melody.springbootlearn.pojo;
 import org.springframework.stereotype.Component;
 
 /**
- * @Author: melody
- * @Date: 2020-10-23
+ * @author: melody
+ * @date: 2020-10-23
  */
 @Component
 public class Students {
