@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
     <property name="USER_NAME" value="/data/logs"/>
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
 
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+<!--            颜色高亮-->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{36}) - %msg%n</pattern>
         </encoder>
+<!--        MDC-->
+<!--        <layout>-->
+<!--            <pattern>%X{first} %X{last} -%m%n</pattern>-->
+<!--        </layout>-->
     </appender>
 
     <logger name="org.melody.springbootlearn.SpringBootLearnApplicationTests" level="debug"/>
 
-    <appender name="file" class="ch.qos.logback.core.FileAppender">
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${USER_NAME}/spring-boot-learn.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+<!--        按天轮转    -->
+            <fileNamePattern>spring-boot-learn.%d{yyyy-MM-dd}.log</fileNamePattern>
+<!--            保存30天日志记录 最大大小为30GB-->
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>30GB</totalSizeCap>
+        </rollingPolicy>
         <encoder>
             <pattern>
                 %date %level [%thread] %logger{10} [%file:%line] %msg%n
@@ -19,7 +32,7 @@
         </encoder>
     </appender>
 
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="stdout"/>
         <appender-ref ref="file"/>
     </root>

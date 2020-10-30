@@ -1,8 +1,11 @@
 package org.melody.springbootlearn.controller;
 
+import org.melody.springbootlearn.exception.UserNotExistException;
 import org.melody.springbootlearn.pojo.Students;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -27,8 +30,12 @@ public class StudentControllerImpl implements StudentsController{
     }
 
     @Override
-    public Students selectStudent(String id) {
-        return null;
+    @RequestMapping("/select")
+    public String selectStudent(@RequestParam("id") String id) {
+        if (id.equals("")){
+            throw new UserNotExistException();
+        }
+        return "hello student";
     }
 
     @Override

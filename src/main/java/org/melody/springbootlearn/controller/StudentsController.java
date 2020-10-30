@@ -1,5 +1,6 @@
 package org.melody.springbootlearn.controller;
 
+import org.melody.springbootlearn.exception.UserNotExistException;
 import org.melody.springbootlearn.pojo.Students;
 
 /**
@@ -27,7 +28,7 @@ public interface StudentsController {
      * @param id
      * @return
      */
-    Students selectStudent(String id);
+    String selectStudent(String id);
 
     /**
      * 修改
